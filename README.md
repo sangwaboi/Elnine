@@ -1,6 +1,6 @@
 # Elnine
 
-Clean, scalable React Native (Expo + TypeScript) app for audio/audio streaming with background playback, HLS, and lock screen controls.
+Clean, scalable React Native (Expo + TypeScript) app for audio streaming with background playback, HLS, and lock screen controls.
 
 ## Structure
 - `apps/mobile` — Expo React Native app
