@@ -1,0 +1,20 @@
+{
+  "expo": {
+    "name": "Elnine Audio",
+    "slug": "elnine-audio",
+    "scheme": "elnine",
+    "plugins": [
+      "react-native-track-player"
+    ],
+    "ios": {
+      "bundleIdentifier": "com.elnine.audio",
+      "supportsTablet": true,
+      "infoPlist": {
+        "UIBackgroundModes": ["audio"]
+      }
+    },
+    "android": {
+      "package": "com.elnine.audio"
+    }
+  }
+}
