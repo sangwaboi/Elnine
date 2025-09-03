@@ -1,13 +1,12 @@
 import React from 'react';
 import { View, Text, Button, StyleSheet } from 'react-native';
-import TrackPlayer from 'react-native-track-player';
 import { SAMPLE_EPISODE } from '../shared/sample';
+import { audioPlayer } from '../player/audio';
 
 export default function HomeScreen() {
 	const loadAndPlay = async () => {
-		await TrackPlayer.reset();
-		await TrackPlayer.add(SAMPLE_EPISODE);
-		await TrackPlayer.play();
+		await audioPlayer.load(SAMPLE_EPISODE.url, SAMPLE_EPISODE.title);
+		await audioPlayer.play();
 	};
 
 	return (

@@ -1,34 +1,32 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
-import TrackPlayer, { State, usePlaybackState } from 'react-native-track-player';
+import { audioPlayer, AudioStatus } from '../player/audio';
 
 export default function PlayerMini() {
-	const playback = usePlaybackState();
-	const [title, setTitle] = useState<string>('');
+	const [status, setStatus] = useState<AudioStatus>({ isLoaded: false, isPlaying: false, positionMillis: 0 });
 
 	useEffect(() => {
-		(async () => {
-			const trackId = await TrackPlayer.getCurrentTrack();
-			if (trackId != null) {
-				const track = await TrackPlayer.getTrack(trackId);
-				setTitle(track?.title ?? '');
-			}
-		})();
-	}, [playback?.state]);
+		const update = async () => setStatus(await audioPlayer.getStatus());
+		update();
+		const handler = (s: AudioStatus) => setStatus(s);
+		audioPlayer.on('status', handler);
+		return () => {
+			audioPlayer.off('status', handler);
+		};
+	}, []);
 
 	const toggle = async () => {
-		const state = await TrackPlayer.getState();
-		if (state === State.Playing) await TrackPlayer.pause();
-		else await TrackPlayer.play();
+		if (status.isPlaying) await audioPlayer.pause();
+		else await audioPlayer.play();
 	};
 
 	return (
 		<View style={styles.container}>
 			<Text style={styles.text} numberOfLines={1}>
-				{title || 'Nothing playing'}
+				{status.title || 'Nothing playing'}
 			</Text>
 			<TouchableOpacity onPress={toggle}>
-				<Text style={styles.action}>{playback?.state === State.Playing ? 'Pause' : 'Play'}</Text>
+				<Text style={styles.action}>{status.isPlaying ? 'Pause' : 'Play'}</Text>
 			</TouchableOpacity>
 		</View>
 	);
