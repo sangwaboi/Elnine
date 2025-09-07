@@ -1,5 +1,14 @@
 # Elnine
 
+#all the necessary link:
+quninn is the most famous app for audio erotic literature.
+
+
+
+
+
+
+
 Clean, scalable React Native audio streaming platform with background playback, real-time backend, and recommendation engine.
 
 ## 🏗️ Architecture Overview
